@@ -5,6 +5,7 @@ const todoList = document.querySelector('.todoList');
 
 // Event Listeners
 todoBtn.addEventListener('click', addTodo);
+todoList.addEventListener('click', deleteComplete);
 
 
 //Functions
@@ -37,4 +38,19 @@ function addTodo(e) {
 
     // 입력 후 입력창 클리어
     todoInput.value ='';
+}
+
+function deleteComplete(e) {
+    const item = e.target;
+    // 삭제 버튼
+    if (item.classList[0] === 'trashBtn') {
+       const todo = item.parentElement;
+       todo.remove();
+    }
+
+    // 완료 버튼
+    if (item.classList[0] === 'completeBtn') {
+        const todo = item.parentElement;
+        todo.classList.toggle('completed');
+    }
 }
