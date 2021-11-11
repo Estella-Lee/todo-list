@@ -5,6 +5,7 @@ const filterOption = document.querySelector('.filterTodo');
 
 
 // Event Listeners
+document.addEventListener('DOMContentLoaded', getTodos);
 todoBtn.addEventListener('click', addTodo);
 todoList.addEventListener('click', deleteComplete);
 filterOption.addEventListener('click', filterTodo);
@@ -22,6 +23,9 @@ function addTodo(e) {
     newTodo.innerText = todoInput.value;
     newTodo.classList.add('todoItem');
     todoDiv.appendChild(newTodo);
+    
+    // todo를 로컬저장소에 저장
+    saveLocalTodos(todoInput.value);
 
     // 체크 버튼
     const completeBtn = document.createElement('button');
@@ -48,6 +52,7 @@ function deleteComplete(e) {
     if (item.classList[0] === 'trashBtn') {
        const todo = item.parentElement;
        todo.classList.add('fall');
+       removeLocalTodos(todo);
        todo.addEventListener('transitionend', function() {
            todo.remove();
        });
@@ -83,4 +88,62 @@ function filterTodo(e) {
                 break;
         }
     });
+}
+
+// 로컬 저장
+function saveLocalTodos(todo) {
+    let todos;
+    if (localStorage.getItem('todos') === null) {
+        todos = [];
+    } else {
+        todos = JSON.parse(localStorage.getItem('todos'));
+    }
+
+    todos.push(todo);
+    localStorage.setItem('todos', JSON.stringify(todos));
+}
+
+// 새로운 아이템 저장
+function getTodos() {
+    let todos;
+    if (localStorage.getItem('todos') === null) {
+        todos = [];
+    } else {
+        todos = JSON.parse(localStorage.getItem('todos'));
+    }
+
+    todos.forEach(function(todo) {
+        const todoDiv = document.createElement('div');
+    todoDiv.classList.add('todo');
+
+    const newTodo = document.createElement('li');
+    newTodo.innerText = todo;
+    newTodo.classList.add('todoItem');
+    todoDiv.appendChild(newTodo);
+
+    const completeBtn = document.createElement('button');
+    completeBtn.innerHTML = '<i class="fas fa-check"><i>';
+    completeBtn.classList.add('completeBtn');
+    todoDiv.appendChild(completeBtn);
+
+    const trashBtn = document.createElement('button');
+    trashBtn.innerHTML = '<i class="fas fa-trash-alt"><i>';
+    trashBtn.classList.add('trashBtn');
+    todoDiv.appendChild(trashBtn);
+
+    todoList.appendChild(todoDiv);
+    })
+}
+
+// 삭제된 아이템 반영
+function removeLocalTodos(todo) {
+    let todos;
+    if (localStorage.getItem('todos') === null) {
+        todos = [];
+    } else {
+        todos = JSON.parse(localStorage.getItem('todos'));
+    }
+    const todoIndex = todo.children[0].innerText;
+    todos.splice(todos.indexOf(todoIndex), 1);
+    localStorage.setItem('todos', JSON.stringify(todos));
 }
