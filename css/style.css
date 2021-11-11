@@ -1,1 +1,46 @@
 @charset "utf-8";
+
+header,
+main,
+footer {
+    min-height: 22vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+header h1 {
+    font-size: 6rem;
+}
+
+
+h2 {
+    margin-bottom: 2vh;
+    padding: 1rem;
+    color: #3D087B;
+}
+
+form {
+    text-align: center;
+}
+
+form input,
+form button {
+    padding: .5rem;
+    font-size: 3rem;
+    border: none;
+}
+
+form button {
+    color: #11052C;
+    font-size: 3rem;
+    background-color: transparent;
+    cursor: pointer;
+    transition: all .3s ease;
+}
+
+form button:hover {
+    color: #3D087B;
+}
+
+
