@@ -45,7 +45,10 @@ function deleteComplete(e) {
     // 삭제 버튼
     if (item.classList[0] === 'trashBtn') {
        const todo = item.parentElement;
-       todo.remove();
+       todo.classList.add('fall');
+       todo.addEventListener('transitionend', function() {
+           todo.remove();
+       });
     }
 
     // 완료 버튼
