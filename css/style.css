@@ -17,10 +17,12 @@ header h1 {
 h2 {
     margin-bottom: 2vh;
     padding: 1rem;
+    text-align: center;
     color: #3D087B;
 }
 
 form {
+    display: flex;
     text-align: center;
 }
 
@@ -51,7 +53,8 @@ form button:hover {
 }
 
 .todoList {
-    min-width: 60%;
+    min-width: 65%;
+    margin-right: auto;
 }
 
 .todo {
@@ -101,4 +104,40 @@ form button:hover {
 .fall {
     transform: translateY(8rem) rotateZ(20deg);
     opacity: 0;
+}
+
+
+select {
+    appearance: none;
+    outline: none;
+    border: none;
+}
+
+.select {
+    position: relative;
+    margin: 1rem;
+    overflow: hidden;
+}
+
+select {
+    color: #11052C;
+    width: 13rem;
+    cursor: pointer;
+    padding: 1rem;
+}
+
+.select::after {
+    content: "\25BC";
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 1rem;
+    color: #fff;
+    background-color: #11052C;
+    pointer-events: none;
+    transition: all .3s ease;
+}
+
+.select:hover::after {
+    background-color: #3D087B;
 }
